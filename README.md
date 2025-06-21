@@ -16,8 +16,10 @@ This task includes the implementation of a shopping cart functionality.
 REQUIREMENTS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 8.2.
+The minimum requirement by this project template that your Web server supports: 
 
+- PHP 8.2.
+- Docker Compose version v2.3.3
 ### SetUp
 
 First of all, create and run the **docker** containers
