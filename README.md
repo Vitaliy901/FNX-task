@@ -10,5 +10,50 @@
 
 ## Fenix industry task for Laravel back-end developer position.
 
-This task includes the implementation of an online shopping cart.
+This task includes the implementation of a shopping cart functionality.
 
+
+REQUIREMENTS
+------------
+
+The minimum requirement by this project template that your Web server supports PHP 8.2.
+
+### SetUp
+
+First of all, create and run the **docker** containers
+
+~~~
+docker compose up -d --build
+~~~
+
+Then, install **composer** inside the **fnx_app** container
+~~~
+docker exec -it fnx_app composer install
+~~~
+### Environment
+
+Create **.env** file form **.env.example** with **db** credentials
+~~~
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=fnx_db
+DB_USERNAME=fnxuser
+DB_PASSWORD=fnxpass
+# DB_OPTIONS='--allowPublicKeyRetrieval=true'
+~~~
+
+### Migration execution
+
+Create migration tables
+~~~
+docker exec -it fnx_app php artisan migrate
+~~~
+> **NOTES:**
+> **Migration works only from php "fnx_app" container.**
+
+Now, you can open the project
+
+**Laravel**: http://localhost:8080
+
+**phpMyAdmin**: http://localhost:8081

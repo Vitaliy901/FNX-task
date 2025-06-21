@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+    app:
+        image: php:8.2-fpm
+        container_name: fnx_app
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "9000:9000"
+        depends_on:
+            db:
+                condition: service_healthy
+        networks:
+            - appnetwork
+        environment:
+            COMPOSER_ALLOW_SUPERUSER: 1
+        command: >
+            bash -c "apt update &&
+                     apt install -y libzip-dev unzip curl libpng-dev libjpeg-dev libonig-dev libxml2-dev zip git &&
+                     docker-php-ext-install pdo pdo_mysql zip gd mbstring xml &&
+                     curl -sS https://getcomposer.org/installer | php &&
+                     mv composer.phar /usr/local/bin/composer &&
+                     composer install &&
+                     php-fpm"
+
+    web:
+        image: nginx:alpine
+        container_name: fnx_web
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www/html
+            - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            - ./storage/logs/nginx/:/var/log/nginx
+        networks:
+            - appnetwork
+        depends_on:
+            - app
+
+    db:
+        image: mysql:8.0
+        container_name: fnx_db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: fnx_db
+            MYSQL_USER: fnxuser
+            MYSQL_PASSWORD: fnxpass
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./dbdata:/var/lib/mysql
+        networks:
+            - appnetwork
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: fnx_pma
+        restart: always
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+        ports:
+            - "8081:80"
+        depends_on:
+            - db
+        networks:
+            - appnetwork
+
+networks:
+    appnetwork:
+        driver: bridge
