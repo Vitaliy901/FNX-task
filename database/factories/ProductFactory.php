@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->asciify('********************'),
             'in_stock' => fake()->randomNumber(2),
-            'price' => fake()->randomNumber(5),
+            'price' =>  fake()->numberBetween(0, 1000),
             'img' => '/storage/app/public' . Str::random(10),
         ];
     }
