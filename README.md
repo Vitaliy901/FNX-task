@@ -45,14 +45,20 @@ DB_PASSWORD=fnxpass
 # DB_OPTIONS='--allowPublicKeyRetrieval=true'
 ~~~
 
-### Migration execution
+### Migrations and Seeds
 
-Create migration tables
+Create migrations tables
 ~~~
 docker exec -it fnx_app php artisan migrate
 ~~~
 > **NOTES:**
-> **Migration works only from php "fnx_app" container.**
+> Migration works only from php **fnx_app** container.
+> You can use just only **docker exec -it fnx_app** command enter the **fnx_app** container.
+
+Calling Seeders
+~~~
+docker exec -it fnx_app php artisan db:seed
+~~~
 
 Now, you can open the project
 
