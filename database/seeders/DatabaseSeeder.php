@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         User::factory()
         ->count(10)
         ->create();
+
+        Product::factory()->count(100)->create();
 
 /*        $this->call([
             UserFactory::class

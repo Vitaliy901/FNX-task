@@ -60,6 +60,16 @@ Calling Seeders
 docker exec -it fnx_app php artisan db:seed
 ~~~
 
+### Filesystem
+
+Create the symbolic storage link for publicly accessible.
+~~~
+php artisan storage:link
+~~~
+> **NOTES:**
+> Migration works only from php **fnx_app** container.
+> You can use just only **docker exec -it fnx_app** command enter the **fnx_app** container.
+
 Now, you can open the project
 
 **Laravel**: http://localhost:8080
