@@ -68,10 +68,18 @@ php artisan storage:link
 ~~~
 > **NOTES:**
 > Migration works only from php **fnx_app** container.
-> You can use just only **docker exec -it fnx_app** command enter the **fnx_app** container.
+> You can use just only **docker exec -it fnx_app** command for entering the **fnx_app** container.
 
 Now, you can open the project
 
 **Laravel**: http://localhost:8080
 
 **phpMyAdmin**: http://localhost:8081
+
+---
+### Description
+
+#### Migrations
+
+Added **unique** property constrain for **user_id** field. With **one to one** **cart** logic (one **user** - one **cart**).
+
