@@ -83,3 +83,6 @@ Now, you can open the project
 
 Added **unique** property constrain for **user_id** field. With **one to one** **cart** logic (one **user** - one **cart**).
 
+#### Frontend
+
+I chose the Laravel **starter kit** includes: **laravel/breeze**, [inertiajs/inertia-larave](https://inertiajs.com/server-side-setup). Which is known for its convenience and ready-made functional solutions.
