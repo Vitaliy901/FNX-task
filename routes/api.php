@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('/user/{id}', [UserController::class, 'show']);
+});
 
-//    ->middleware('auth:sanctum');
+
